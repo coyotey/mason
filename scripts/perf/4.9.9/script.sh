@@ -23,12 +23,14 @@ function mason_prepare_compile {
     MASON_CCACHE=$(${MASON_DIR}/mason prefix ccache ${CCACHE_VERSION})
     ${MASON_DIR}/mason install binutils 2.27
     MASON_BINUTILS=$(${MASON_DIR}/mason prefix binutils 2.27)
+    ${MASON_DIR}/mason install slang 2.3.1
+    MASON_SLANG=$(${MASON_DIR}/mason prefix slang 2.3.1)
     ${MASON_DIR}/mason install bzip2 1.0.6
     MASON_BZIP2=$(${MASON_DIR}/mason prefix bzip2 1.0.6)
     ${MASON_DIR}/mason install elfutils 0.168
     MASON_ELFUTILS=$(${MASON_DIR}/mason prefix elfutils 0.168)
-    EXTRA_CFLAGS="-m64 -I${MASON_BINUTILS}/include -I${MASON_BZIP2}/include -I${MASON_ELFUTILS}/include"
-    EXTRA_LDFLAGS="-L${MASON_BZIP2}/lib -L${MASON_ELFUTILS}/lib -L${MASON_BINUTILS}/lib"
+    EXTRA_CFLAGS="-m64 -I${MASON_SLANG}/include  -I${MASON_BINUTILS}/include -I${MASON_BZIP2}/include -I${MASON_ELFUTILS}/include"
+    EXTRA_LDFLAGS="-L${MASON_BZIP2}/lib -L${MASON_SLANG}/lib  -L${MASON_ELFUTILS}/lib -L${MASON_BINUTILS}/lib"
 }
 
 # https://perf.wiki.kernel.org/index.php/Jolsa_Howto_Install_Sources
@@ -50,8 +52,6 @@ function mason_compile {
       NO_LZMA=1 \
       NO_LIBCRYPTO=1 \
       NO_LIBPERL=1 \
-      NO_SLANG=1 \
-      NO_NEWT=1 \
       NO_GTK2=1 \
       LDFLAGS="${EXTRA_LDFLAGS}" \
       NO_LIBPYTHON=1 \

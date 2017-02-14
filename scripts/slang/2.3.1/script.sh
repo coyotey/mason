@@ -2,7 +2,7 @@
 
 MASON_NAME=slang
 MASON_VERSION=2.3.1
-MASON_LIB_FILE=lib/libslang2.so
+MASON_LIB_FILE=lib/libslang.a
 
 . ${MASON_DIR}/mason.sh
 
