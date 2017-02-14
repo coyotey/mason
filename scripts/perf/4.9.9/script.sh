@@ -37,12 +37,10 @@ function mason_prepare_compile {
 # https://software.intel.com/en-us/articles/linux-perf-for-intel-vtune-Amplifier-XE
 function mason_compile {
     # JOBS=${MASON_CONCURRENCY} \
-    mkdir -p /tmp/build/perf
-    #  -C tools/perf \
-    #  O=/tmp/build/perf \
-    #       FEATURES_DUMP=1 \
+    cd tools/perf
     # note: LIBELF is needed for symbols + node --perf_basic_prof_only_functions
     make V=1 VF=1 \
+      prefix=${MASON_PREFIX} \
       NO_LIBNUMA=1 \
       NO_LIBAUDIT=1 \
       NOLIBBIONIC=1 \
@@ -59,9 +57,8 @@ function mason_compile {
       LDFLAGS="${EXTRA_LDFLAGS}" \
       NO_LIBPYTHON=1 \
       WERROR=0 \
-      EXTRA_CFLAGS="${EXTRA_CFLAGS}"
-    make install
-
+      EXTRA_CFLAGS="${EXTRA_CFLAGS}" \
+      install
 }
 
 function mason_cflags {
