@@ -28,7 +28,8 @@ function mason_compile {
      --disable-dependency-tracking
 
     make -j${MASON_CONCURRENCY} V=1
-    make install  
+    make install
+    rm ${MASON_PREFIX}/lib/*so
 }
 
 function mason_cflags {
