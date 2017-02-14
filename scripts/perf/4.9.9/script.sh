@@ -47,7 +47,6 @@ function mason_compile {
       NO_LIBUNWIND=1 \
       NO_BACKTRACE=1 \
       NO_DWARF=1 \
-      NO_LIBELF=1 \
       NO_LZMA=1 \
       NO_LIBCRYPTO=1 \
       NO_LIBPERL=1 \

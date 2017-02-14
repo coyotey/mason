@@ -9,7 +9,7 @@ matrix:
           sources:
            - ubuntu-toolchain-r-test
           # apt:
-          #  make systemtap-sdt-dev bison flex libelf-dev libaudit-dev libdw-dev libunwind* python-dev libnuma-dev libelf1 libperl-dev libnuma-dev libslang2-dev libslang2 libslang2-dev elfutils libiberty-dev 
+          #  make systemtap-sdt-dev bison flex libperl-dev
           # yum:
           #  make flex bison elfutils-libelf-devel elfutils-devel libunwind-devel xz-devel numactl-devel openssl-devel slang-devel gtk2-devel perl-ExtUtils-Embed python-devel binutils-devel audit-libs-devel
           packages:
