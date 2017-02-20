@@ -69,8 +69,8 @@ function mason_compile {
     MASON_LINKED_REL="${MASON_ROOT}/.link"
     MASON_LINKED_ABS="${MASON_ROOT}/.link"
     if [[ $(uname -s) == 'Linux' ]]; then
-        CUSTOM_CXXFLAG="-D_GLIBCXX_USE_CXX11_ABI=0"
-        CUSTOM_LDFLAGS='-Wl,-z,origin -Wl,-rpath=\\\$\$ORIGIN'
+        echo "CUSTOM_LDFLAGS = '-Wl,-z,origin -Wl,-rpath=\\\$\$ORIGIN/../lib/ -Wl,-rpath=\\\$\$ORIGIN/../../'" > config.py
+        echo "CUSTOM_CXXFLAG = '-D_GLIBCXX_USE_CXX11_ABI=0'" >> config.py
     fi
     ./configure \
         CXX="${MASON_LINKED_REL}/bin/ccache ${MASON_LINKED_REL}/bin/clang++" \
@@ -78,8 +78,6 @@ function mason_compile {
         PREFIX=${MASON_PREFIX} \
         PATH_REPLACE="${HOME}/build/mapbox/mason/mason_packages:./mason_packages" \
         MAPNIK_BUNDLED_SHARE_DIRECTORY=True \
-        CUSTOM_CXXFLAGS="${CUSTOM_CXXFLAGS:-''}" \
-        CUSTOM_LDFLAGS="${CUSTOM_LDFLAGS:-''}" \
         RUNTIME_LINK="static" \
         INPUT_PLUGINS="all" \
         PATH="${MASON_LINKED_REL}/bin" \
