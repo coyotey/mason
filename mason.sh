@@ -1,4 +1,4 @@
-set -e
+set -eu
 set -o pipefail
 # set -x
 
@@ -47,7 +47,7 @@ if [ ${MASON_PLATFORM} = 'osx' ]; then
         MASON_SDK_ROOT=${MASON_XCODE_ROOT}/Platforms/MacOSX.platform/Developer
         MASON_SDK_PATH="${MASON_SDK_ROOT}/SDKs/MacOSX${MASON_SDK_VERSION}.sdk"
 
-        if [[ ${MASON_SYSTEM_PACKAGE} && ${MASON_SDK_VERSION%%.*} -ge 10 && ${MASON_SDK_VERSION##*.} -ge 11 ]]; then
+        if [[ ${MASON_SYSTEM_PACKAGE:-} && ${MASON_SDK_VERSION%%.*} -ge 10 && ${MASON_SDK_VERSION##*.} -ge 11 ]]; then
             export MASON_DYNLIB_SUFFIX="tbd"
         else
             export MASON_DYNLIB_SUFFIX="dylib"
@@ -96,14 +96,14 @@ elif [ ${MASON_PLATFORM} = 'linux' ]; then
     export MASON_DYNLIB_SUFFIX="so"
 
     # Assume current system is the target platform
-    if [ -z ${MASON_PLATFORM_VERSION} ] ; then
-        export MASON_PLATFORM_VERSION=`uname -m`
+    if [ ! ${MASON_PLATFORM_VERSION:-} ] ; then
+        export MASON_PLATFORM_VERSION=$(uname -m)
     fi
 
     export CFLAGS="-fPIC"
     export CXXFLAGS="${CFLAGS} -std=c++11"
 
-    if [ `uname -m` != ${MASON_PLATFORM_VERSION} ] ; then
+    if [ $(uname -m) != ${MASON_PLATFORM_VERSION} ] ; then
         # Install the cross compiler
         MASON_XC_PACKAGE_NAME=gcc
         MASON_XC_PACKAGE_VERSION=${MASON_XC_GCC_VERSION:-5.3.0}-${MASON_PLATFORM_VERSION}
@@ -121,7 +121,7 @@ elif [ ${MASON_PLATFORM} = 'linux' ]; then
     fi
 
 elif [ ${MASON_PLATFORM} = 'android' ]; then
-    case "${MASON_PLATFORM_VERSION}" in
+    case "${MASON_PLATFORM_VERSION:-}" in
         arm-v5-9) export MASON_ANDROID_ABI=arm-v5 ;;
         arm-v7-9) export MASON_ANDROID_ABI=arm-v7 ;;
         arm-v8-21) export MASON_ANDROID_ABI=arm-v8 ;;
