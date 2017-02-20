@@ -68,6 +68,9 @@ function mason_prepare_compile {
 function mason_compile {
     MASON_LINKED_REL="${MASON_ROOT}/.link"
     MASON_LINKED_ABS="${MASON_ROOT}/.link"
+    ls ${MASON_LINKED_ABS}
+    ls ${MASON_LINKED_ABS}/bin/
+    ls ${MASON_LINKED_ABS}/include/
     if [[ $(uname -s) == 'Linux' ]]; then
         echo "CUSTOM_LDFLAGS = '-Wl,-z,origin -Wl,-rpath=\\\$\$ORIGIN/../lib/ -Wl,-rpath=\\\$\$ORIGIN/../../'" > config.py
         echo "CUSTOM_CXXFLAG = '-D_GLIBCXX_USE_CXX11_ABI=0'" >> config.py
