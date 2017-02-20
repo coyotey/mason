@@ -43,7 +43,6 @@ ICU_VERSION="55.1"
 function mason_prepare_compile {
     install clang++ 3.9.1
     install ccache 3.3.1
-    install zlib system
     install jpeg_turbo 1.5.1 libjpeg
     install libpng 1.6.28 libpng
     install libtiff 4.0.7 libtiff
