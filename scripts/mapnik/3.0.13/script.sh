@@ -65,6 +65,8 @@ function mason_prepare_compile {
 }
 
 function mason_compile {
+    export PATH="${MASON_ROOT}/.link/bin:${PATH}"
+    which gdal-config
     MASON_LINKED_REL="${MASON_ROOT}/.link"
     MASON_LINKED_ABS="${MASON_ROOT}/.link"
     ls ${MASON_LINKED_ABS}
