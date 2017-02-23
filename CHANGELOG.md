@@ -1,5 +1,10 @@
 # Mason releases
 
+## 0.8.0
+ - Added
+    - zeromq 4.2.2
+    - cppzmq 4.2.1
+
 ## 0.7.0
 
  - Added
